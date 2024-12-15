@@ -1,0 +1,20 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore virtual environments
+env/
+.env
+
+# Ignore compiled JavaScript files
+*.js.map
+
+# Ignore system files (macOS)
+.DS_Store
+
+# Ignore log files
+*.log
+
+# Ignore build directories
+build/
+dist/
+node_modules/

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: xx-large;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: #ccc 0px 0px 5px;
+        }
+        .error {
+            color: #d9534f;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: #007BFF 0px 0px 1px;
+        }
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: #007BFF 0px 0px 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Form Validation</h2>
+
+    <form id="validationForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span class="error" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <span class="error" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile">
+            <span class="error" id="mobileError"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+                <option value="">Select a country</option>
+                <option value="Saudia Arabia">Saudia Arabia</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="United Kingdom">United Kingdom</option>
+            </select>
+            <span class="error" id="countryError"></span>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('validationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let isValid = true;
+
+            // Clear previous errors
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('mobileError').textContent = '';
+            document.getElementById('mobileError').style.display = 'none';
+            document.getElementById('countryError').textContent = '';
+            document.getElementById('countryError').style.display = 'none';
+
+            // Validate Name
+            const name = document.getElementById('name').value;
+            if (!name) {
+            isValid = false;
+            document.getElementById('nameError').textContent = 'Name is required';
+            document.getElementById('nameError').style.display = 'block';
+            }
+
+            // Validate Email
+            const email = document.getElementById('email').value;
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            isValid = false;
+            document.getElementById('emailError').textContent = 'Valid email is required';
+            document.getElementById('emailError').style.display = 'block';
+            }
+
+            // Validate Mobile
+            const mobile = document.getElementById('mobile').value;
+            if (!mobile || !/^\d+$/.test(mobile)) {
+            isValid = false;
+            document.getElementById('mobileError').textContent = 'Valid mobile number is required';
+            document.getElementById('mobileError').style.display = 'block';
+            }
+
+            // Validate Country
+            const country = document.getElementById('country').value;
+            if (!country) {
+            isValid = false;
+            document.getElementById('countryError').textContent = 'Country selection is required';
+            document.getElementById('countryError').style.display = 'block';
+            }
+
+            if (isValid) {
+            alert('Form submitted successfully');
+            document.getElementById('validationForm').reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
